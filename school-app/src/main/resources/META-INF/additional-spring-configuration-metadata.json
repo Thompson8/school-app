@@ -1,0 +1,32 @@
+{"properties": [
+  {
+    "name": "app.server.port",
+    "type": "java.lang.String",
+    "description": "A description for 'app.server.port'"
+  },
+  {
+    "name": "app.server.context-path",
+    "type": "java.lang.String",
+    "description": "A description for 'app.server.context-path'"
+  },
+  {
+    "name": "app.data.source.url",
+    "type": "java.lang.String",
+    "description": "A description for 'app.data.source.url'"
+  },
+  {
+    "name": "app.data.source.driver-class-name",
+    "type": "java.lang.String",
+    "description": "A description for 'app.data.source.driver-class-name'"
+  },
+  {
+    "name": "app.data.source.user",
+    "type": "java.lang.String",
+    "description": "A description for 'app.data.source.user'"
+  },
+  {
+    "name": "app.data.source.password",
+    "type": "java.lang.String",
+    "description": "A description for 'app.data.source.password'"
+  }
+]}
