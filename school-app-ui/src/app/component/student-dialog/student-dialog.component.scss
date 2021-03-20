@@ -1,0 +1,20 @@
+form {
+    div {
+        display: flex;
+        flex-direction: column;
+        div {
+            padding-bottom: 5px;
+        }
+    }
+}
+
+nb-card-footer {
+    div {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        div {
+            padding: 5px;
+        }
+    }
+}

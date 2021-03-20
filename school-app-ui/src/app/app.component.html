@@ -1,0 +1,28 @@
+<div *ngIf="isAuthenticated(); then thenBlock else elseBlock"></div>
+<ng-template #thenBlock>
+  <nb-layout>
+    <nb-layout-header>
+      <app-header></app-header>
+    </nb-layout-header>
+
+    <nb-sidebar>
+      <app-menu></app-menu>
+    </nb-sidebar>
+
+    <nb-layout-column>
+      <router-outlet></router-outlet>
+    </nb-layout-column>
+
+  </nb-layout>
+</ng-template>
+<ng-template #elseBlock>
+  <nb-layout>
+    <nb-layout-column>
+      <nb-card>
+        <nb-card-body>
+          <app-login></app-login>
+        </nb-card-body>
+      </nb-card>
+    </nb-layout-column>
+  </nb-layout>s
+</ng-template>

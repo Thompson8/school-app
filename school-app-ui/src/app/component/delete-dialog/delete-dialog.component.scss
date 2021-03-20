@@ -1,0 +1,12 @@
+nb-card-body {
+    div {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        div {
+            align-items: center;
+            padding: 5px;
+            flex-direction: column;
+        }
+    }
+}

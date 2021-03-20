@@ -1,0 +1,103 @@
+<nb-card [nbSpinner]="loading">
+    <nb-card-body>
+        <h1>Courses</h1>
+        <div style="justify-content: space-between;">
+            <div>
+                <button nbButton ghost status="basic" (click)="openCreateDialog()">
+                    <nb-icon icon="plus-circle-outline" nbTooltip="Add new course"></nb-icon>
+                </button>
+            </div>
+            <div>
+                <div>
+                    <button nbButton ghost status="basic" (click)="loadData()">
+                        <nb-icon icon="refresh-outline" nbTooltip="Refresh"></nb-icon>
+                    </button>
+                </div>
+                <div>
+                    <div>
+                        <input [formControl]="searchFormControl" nbInput type="text" placeholder="Column to search by"
+                            [nbAutocomplete]="auto" />
+                    </div>
+                    <div>
+                        <nb-autocomplete #auto [activeFirst]="true">
+                            <nb-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                {{ option }}
+                            </nb-option>
+                        </nb-autocomplete>
+                    </div>
+                    <div>
+                        <input nbInput type="text" placeholder="Value to search for" [(ngModel)]="searchValue" />
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <button nbButton status="primary" (click)="search()" nbTooltip="Search">
+                            Search
+                        </button>
+                    </div>
+                    <div>
+                        <button nbButton status="secondary" (click)="clearSearch()" nbTooltip="Clear search">
+                            Clear
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <table [nbTreeGrid]="dataSource" [nbSort]="dataSource" (sort)="updateSort($event)">
+                <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="columnIds"></tr>
+                <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: columnIds"></tr>
+                <ng-container *ngFor="let column of columns" [nbTreeGridColumnDef]="column.id">
+                    <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(column.id)" *nbTreeGridHeaderCellDef>
+                        {{column.name}}</th>
+                    <td nbTreeGridCell *nbTreeGridCellDef="let row">
+                        <div *ngIf="column.isAction !== true; then thenBlock else elseBlock"></div>
+                        <ng-template #thenBlock>{{row.data[column.property] || '-'}}</ng-template>
+                        <ng-template #elseBlock>
+                            <div style="justify-content: center;">
+                                <div>
+                                    <button nbButton status="secondary" nbTooltip="View course"
+                                        (click)="openViewDialog(row.data.id)">
+                                        View
+                                    </button>
+                                </div>
+                                <div>
+                                    <button nbButton status="secondary" nbTooltip="Edit course"
+                                        (click)="openEditDialog(row.data.id)">
+                                        Edit
+                                    </button>
+                                </div>
+                                <div>
+                                    <button nbButton ghost status="danger" (click)="openDeleteDialog(row.data.id)">
+                                        <nb-icon icon="trash-2-outline" nbTooltip="Delete course"></nb-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </td>
+                </ng-container>
+            </table>
+        </div>
+        <div>
+            <div>
+                <nb-select placeholder="Page size" nbTooltip="Page size" [(selected)]="pageSize"
+                    (selectedChange)="changePageSize()">
+                    <nb-option *ngFor="let size of pageSizes" [value]="size">{{size}}</nb-option>
+                </nb-select>
+            </div>
+            <div>
+                {{calculateElementsOnPageStart()}} - {{calculateElementsOnPageEnd()}} of {{totalElements}}
+            </div>
+            <div>
+                <button nbButton ghost status="basic" (click)="prevPage()" [disabled]="(pageNumber - 1) < 0">
+                    <nb-icon icon="arrow-ios-back-outline" nbTooltip="Previous page"></nb-icon>
+                </button>
+            </div>
+            <div>
+                <button nbButton ghost status="basic" (click)="nextPage()" [disabled]="(pageNumber + 1) >= totalPages">
+                    <nb-icon icon="arrow-ios-forward-outline" nbTooltip="Next page"></nb-icon>
+                </button>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>

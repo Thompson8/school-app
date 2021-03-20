@@ -1,0 +1,24 @@
+<nb-card [nbSpinner]="loading">
+    <nb-card-header>
+        <span>Do you really want to delete?</span>
+    </nb-card-header>
+    <nb-card-body>
+        <div>
+            <span class="text-danger" *ngIf="deleteError">
+                Error occured during delete
+            </span>
+        </div>
+        <div>
+            <div>
+                <button nbButton status="danger" (click)="delete()">
+                    Delete
+                </button>
+            </div>
+            <div>
+                <button nbButton status="basic" (click)="close()">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>

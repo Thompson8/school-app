@@ -1,0 +1,111 @@
+<nb-card [nbSpinner]="loading">
+    <nb-card-header>
+        <span *ngIf="isCreate()">Create new student</span>
+        <span *ngIf="isModify()">Modify student</span>
+        <span *ngIf="isView()">View student</span>
+    </nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="studentForm">
+            <div>
+                <div>
+                    <span>First name:</span>
+                </div>
+                <div>
+                    <input id="firstName" name="firstName" formControlName="firstName" nbInput type="text"
+                        placeholder="First name" />
+                </div>
+            </div>
+            <div
+                *ngIf="!isView() && (studentFormControl.firstName.touched || submitted)  && studentFormControl.firstName.errors !== null">
+                <span class="text-danger" *ngIf="studentFormControl.firstName.errors?.required">
+                    First name is required
+                </span>
+                <span class="text-danger"
+                    *ngIf="studentFormControl.firstName.errors?.minlength || studentFormControl.firstName.errors?.maxlength">
+                    First name length must be beetween 1 and 64 characters
+                </span>
+            </div>
+            <div>
+                <div>
+                    <span>Last name:</span>
+                </div>
+                <div>
+                    <input id="lastName" name="lastName" formControlName="lastName" nbInput type="text"
+                        placeholder="Last name" />
+                </div>
+            </div>
+            <div
+                *ngIf="!isView() && (studentFormControl.lastName.touched || submitted)  && studentFormControl.lastName.errors !== null">
+                <span class="text-danger" *ngIf="studentFormControl.lastName.errors?.required">
+                    Last name is required
+                </span>
+                <span class="text-danger"
+                    *ngIf="studentFormControl.lastName.errors?.minlength || studentFormControl.lastName.errors?.maxlength">
+                    Last name length must be beetween 1 and 64 characters
+                </span>
+            </div>
+            <div>
+                <div>
+                    <span>Birth date:</span>
+                </div>
+                <div>
+                    <input [nbDatepicker]="datepicker" id="birthDate" name="birthDate" formControlName="birthDate"
+                        placeholder="Birth date" nbInput>
+                    <nb-datepicker #datepicker></nb-datepicker>
+                </div>
+            </div>
+            <div
+                *ngIf="!isView() && (studentFormControl.birthDate.touched || submitted)  && studentFormControl.birthDate.errors !== null">
+                <span class="text-danger" *ngIf="studentFormControl.birthDate.errors?.required">
+                    Birth date is required
+                </span>
+            </div>
+        </form>
+        <div style="justify-content: center">
+            <span class="text-danger" *ngIf="error">
+                Error occured
+            </span>
+            <span class="text-success" *ngIf="success">
+                Success
+            </span>
+        </div>
+    </nb-card-body>
+    <nb-card-footer>
+        <div *ngIf="isView()">
+            <div>
+                <button nbButton status="success" (click)="startEdit()">
+                    Edit
+                </button>
+            </div>
+            <div>
+                <button nbButton status="danger" (click)="close()">
+                    Close
+                </button>
+            </div>
+        </div>
+        <div *ngIf="isCreate()">
+            <div>
+                <button nbButton status="success" (click)="createStudent()">
+                    Save
+                </button>
+            </div>
+            <div>
+                <button nbButton status="danger" (click)="close()">
+                    Cancel
+                </button>
+            </div>
+        </div>
+        <div *ngIf="isModify()">
+            <div>
+                <button nbButton status="success" (click)="updateStudent()">
+                    Save
+                </button>
+            </div>
+            <div>
+                <button nbButton status="danger" (click)="close()">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </nb-card-footer>
+</nb-card>

@@ -1,0 +1,32 @@
+<form [formGroup]="loginForm">
+    <div>
+        <h1>School app login</h1>
+    </div>
+    <div>
+        <input id="username" name="username" formControlName="username" nbInput type="text" placeholder="Username" />
+    </div>
+    <div *ngIf="(loginFormControl.username.touched || submitted)  && loginFormControl.username.errors !== null">
+        <span class="text-danger" *ngIf="loginFormControl.username.errors?.required">
+            Username is required
+        </span>
+    </div>
+    <div>
+        <input id="password" name="password" formControlName="password" nbInput type="password"
+            placeholder="Password" />
+    </div>
+    <div *ngIf="(loginFormControl.password.touched || submitted)  && loginFormControl.password.errors !== null">
+        <span class="text-danger" *ngIf="loginFormControl.password.errors?.required">
+            Password is required
+        </span>
+    </div>
+    <div *ngIf="isError">
+        <span class="text-danger">
+            Invalid username or password
+        </span>
+    </div>
+    <div>
+        <button nbButton status="success" (click)="login()">
+            Login
+        </button>
+    </div>
+</form>

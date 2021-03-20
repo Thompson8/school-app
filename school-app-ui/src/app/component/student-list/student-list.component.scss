@@ -1,0 +1,30 @@
+nb-card {
+    nb-card-body {
+        div {
+            display: flex;
+            padding: 10px;
+            justify-content: flex-end;
+            div {
+                align-items: center;
+                padding: 5px;
+            }
+        }
+    }
+}
+
+td {
+    div {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 10px;
+    }
+}
+
+th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: gray;
+    color: white;
+}
